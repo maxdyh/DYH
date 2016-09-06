@@ -35,10 +35,12 @@ gulp.task('vendor', function() {
     'bower_components/bootstrap/dist/js/bootstrap.js',
     'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
     'bower_components/toastr/toastr.js',
-    'bower_components/headeroom.js/dist/headroom.js',
-    'bower_components/headeroom.js/dist/jQuery.headroom.js'
+    'bower_components/headroom.js/dist/headroom.js',
+    'bower_components/headroom.js/dist/jQuery.headroom.js',
+    'bower_components/wangEditor/dist/js/wangEditor.js',
+    'app/js/main.js'
   ]).pipe(concat('vendor.js'))
-    .pipe(gulpif(production, uglify({ mangle: false })))
+    .pipe(uglify({ mangle: false }))
     .pipe(gulp.dest('public/js'));
 });
 
@@ -53,7 +55,7 @@ gulp.task('browserify-vendor', function() {
     .bundle()
     .pipe(source('vendor.bundle.js'))
     .pipe(buffer())
-    .pipe(gulpif(production, uglify({ mangle: false })))
+    .pipe(uglify({ mangle: false }))
     .pipe(gulp.dest('public/js'));
 });
 
@@ -70,7 +72,7 @@ gulp.task('browserify', ['browserify-vendor'], function() {
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(gulpif(production, uglify({ mangle: false })))
+    .pipe(uglify({ mangle: false }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/js'));
 });
@@ -114,7 +116,7 @@ gulp.task('less', function() {
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(gulpif(production, cssmin()))
+    .pipe(cssmin())
     .pipe(gulp.dest('public/css'));
 });
 
@@ -123,7 +125,8 @@ gulp.task('sass', function() {
 })
 
 gulp.task('watch', function() {
-  gulp.watch('app/stylesheets/**/*.less', ['styles']);
+  gulp.watch('app/stylesheets/**/*.less', ['less']);
+  gulp.watch('app/js/**/*.js', ['vendor']);
 });
 
 gulp.task('default', ['less', 'vendor', 'browserify-watch', 'watch']);

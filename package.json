@@ -1,10 +1,15 @@
 {
-  "name": "dayinhen",
+  "name": "dyh",
   "version": "1.0.0",
   "description": "daiyingheng's blog",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "postinstall": "bower install && gulp build"
+  },
+  "babel": {
+    "presets": ["es2015", "react"]
   },
   "dependencies": {
     "alt": "^0.17.8",

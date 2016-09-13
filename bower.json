@@ -19,7 +19,7 @@
     "bootstrap": "^3.3.5",
     "magnific-popup": "^1.0.0",
     "toastr": "^2.1.1",
-    "headroom.js": "https://npmcdn.com/headroom.js/bower.zip",
+    "headroom.js": "https://unpkg.com/headroom.js/bower.zip",
     "animate.css": "^3.5.2",
     "hint.css": "^2.3.2",
     "wangEditor": "^2.1.18",
